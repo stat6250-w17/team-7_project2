@@ -29,36 +29,66 @@ title2 'Rationale: This includes 2-point, 3-point, and FT attempts to give the m
 footnote1 'The player with the higest True Shooting Percentage is displayed';
 
 *
-Methodology: For each player the calculate TS% = Points/(2 * (FGA+0.44)*FTA)
+Methodology: For each player the calculate TS% = Points/( 2 * (FGA+(0.44*FTA) ) )
 I will create new variables for total points, total Field Goal attempts, 
 and total free throw attempts. The data is sorted so the higher TS% is the
 first observation and this is displayed.
+;
 
-* some SAS code;
+proc means data=MJ_LJ_analytic_file sum noprint;
+	var PTS FGA FTA;
+	class Player;
+	output out=MJ_LJ_TSperc sum=PTStotal FGAtotal FTAtotal;
+run;
+
+data MJ_LJ_TSperc;
+	set MJ_LJ_TSperc;
+	TSperc = PTStotal / ( 2 * (FGAtotal + (0.44*FTAtotal) ) );
+run;
+
+proc print data=MJ_LJ_TSperc;
+	id Player;
+	var TSperc;
+	where not(missing(Player));
+run;
 
 title;
 footnote;
 
 
 
-title1 'Which player's Usage Rate had higher correlation with their team winning the game?;
+title1 'Which players Usage Rate had higher correlation with their team winning the game?';
 title2 'Rationale: Great players heavily influence the outcome of games and should help their teams win.';
 footnote1 'The player whose Usage Rate has a higher correlation to winning is displayed';
-
 
 *
 Methodology: Use PROC LOGISTIC to compute a simple binary regession model 
 with this factor: Usage Rate as it relates to individual game wins.
 ;
 
-* some SAS code;
+proc logistic data=MJ_LJ_analytic_file descending;
+	by Player notsorted;
+    model Result = USGperc;
+run;
+
+/*
+data USG_corr;
+	set MJ_LJ_analytic_file;
+	if Result = 'W' then ResultBin = 1;
+	else ResultBin = 0;
+run;
+
+proc corr data=USG_corr;
+	by Player notsorted;
+    var ResultBin USGperc;
+run;*/
 
 title;
 footnote;
 
 
 title1 'Which player had the higher average margin of victory during the season?';
-title2 'Rationale: Both players' teams had winning records, but we want to see which team was truly dominating opponents.';
+title2 'Rationale: Both players teams had winning records, but we want to see which team was truly dominating opponents.';
 footnote1 'The player with the higher margin of victory is displayed';
 
 *
@@ -66,7 +96,17 @@ Methodology: Extract the numeric value from the Margin attribute.
 Sum this value for each player and display the player with the higher value.
 ;
 
-* some SAS code;
+data MJ_LJ_Margin;
+	set MJ_LJ_analytic_file;
+	MarginNum = input(Margin, 8.0);
+	if Result = 'L' then MarginNum = -1 * MarginNum;
+run;
+
+proc means data=MJ_LJ_Margin sum;
+	var MarginNum;
+	class Player;
+	*output out=MJ_LJ_Margin sum=MarginTotal;
+run;
 
 title;
 footnote;
