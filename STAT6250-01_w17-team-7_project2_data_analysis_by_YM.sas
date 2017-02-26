@@ -6,6 +6,7 @@
 This file uses the following analytic dataset to 
 address questions about two of the greatest basketball 
 players to ever live: Michael Jordan and Lebron James
+
 Dataset Name: MJ_LJ_analytic_file created in external file
 STAT6250-01_w17-team-7_project2_data_preparation.sas, which is assumed to be
 in the same directory as this file
