@@ -58,14 +58,6 @@ footnote1
 "Table shows a comparison of the dribles for each player"
 ;
 
-footnote2
-""
-;
-
-footnote3
-""
-;
-
 *
 Note: 
 
@@ -73,24 +65,12 @@ Methodology:
 
 ;
 proc means data=MJ_LJ_analytic_file sum noprint;
-	var PTS FGA FTA;
 	class Player;
-	output out=MJ_LJ_TSperc sum=PTStotal FGAtotal FTAtotal;
+	output out= dribbles_and_shots;
 run;
-
-data MJ_LJ_TSperc;
-	set MJ_LJ_TSperc;
-	TSperc = PTStotal / ( 2 * (FGAtotal + (0.44*FTAtotal) ) );
+  
+proc print noobs data=sum_of_points_of_each_player(obs=5);
 run;
-
-proc print data=MJ_LJ_TSperc;
-	id Player;
-	var TSperc;
-	where not(missing(Player));
-run;
-
-title;
-footnote;
 
 title;
 footnote;
@@ -108,15 +88,7 @@ title2
 ;
 
 footnote1
-""
-;
-
-footnote2
-""
-;
-
-footnote3
-""
+" result is the dribbles for both the players in during the games"
 ;
 
 *
@@ -125,9 +97,12 @@ Note:
 Methodology: Using Proc Mean canculate calculate the mean for the 2 playes.
 
 ;
-proc logistic data=MJ_LJ_analytic_file descending;
-	by Player notsorted;
-    model Result = USGperc;
+proc mean data=MJ_LJ_analytic_file descending;
+	class Player;
+	output out= dribbles_for_both;
+run;
+  
+proc print noobs data=sum_of_points_of_each_player(obs=5);
 run;
 
 title;
@@ -147,33 +122,21 @@ title2
 ;
 
 footnote1
-""
-;
-
-footnote2
-""
-;
-
-footnote3
-""
+"Table shows the games with most scores for the 2 players."
 ;
 
 *
 Note: 
 
-Methodology: 
+Methodology: Sum up the scores for both the players
 
 ;
 data MJ_LJ_Margin;
-	set MJ_LJ_analytic_file;
-	MarginNum = input(Margin, 8.0);
-	if Result = 'L' then MarginNum = -1 * MarginNum;
-run;
-
-proc means data=MJ_LJ_Margin sum;
-	var MarginNum;
 	class Player;
-	*output out=MJ_LJ_Margin sum=MarginTotal;
+	output out= scores_for_both;
+run;
+  
+proc print noobs data=sum_of_points_of_each_player(obs=1);
 run;
 
 title;
