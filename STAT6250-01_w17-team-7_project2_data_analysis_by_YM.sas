@@ -42,29 +42,23 @@ relative file import path to the current directory, if using Windows;
 %mend;
 %setup
 
-Research questions:
 
-1. Which player had the higher overall FG percentage? (Rationale: Shooting is a fundamental point of comparison for basketball players).
-
-2. Which player had the had the higher points scored - to - minutes played ratio? (Rationale: This is a measure of offensive efficiency)
-
-3. Which player had the higher steals - to - fouls ratio? (Rationale: This is a measure of defensive efficiency)
 
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
 
 title1
-"Research Question: Compare the 2 players dribbles and shots."
+"Research Question 1: Which player had the higher overall FG percentage?"
 ;
 
 title2
-"Rationale: The 2 great players can be assessed based on their dribbles that resulted in scores."
+"Rationale: Shooting is a fundamental point of comparison for basketball players."
 
 ;
 
 footnote1
-"Table shows a comparison of the dribles for each player"
+""
 ;
 
 footnote2
@@ -82,14 +76,14 @@ Methodology:
 
 ;
 proc means data=MJ_LJ_analytic_file sum noprint;
-	var PTS FGA FTA;
+	var FGA;
 	class Player;
-	output out=MJ_LJ_TSperc sum=PTStotal FGAtotal FTAtotal;
+	output out=MJ_LJ_TSperc sum=FGAtotal;
 run;
 
 data MJ_LJ_TSperc;
 	set MJ_LJ_TSperc;
-	TSperc = PTStotal / ( 2 * (FGAtotal + (0.44*FTAtotal) ) );
+	TSperc = (PTStotal /FGAtotal)*100 );
 run;
 
 proc print data=MJ_LJ_TSperc;
@@ -109,11 +103,11 @@ footnote;
 *******************************************************************************;
 
 title1
-"Research Question: Number of total dribbles for both the great players in all the games."
+"Research Question: Which player had the had the higher points scored - to - minutes played ratio?"
 ;
 
 title2
-"Rationale: This is a way to distinguish between great shooters, and great play makers."
+"Rationale: This is a measure of offensive efficiency."
 ;
 
 footnote1
@@ -131,7 +125,7 @@ footnote3
 *
 Note: 
 
-Methodology: Using Proc Mean canculate calculate the mean for the 2 playes.
+Methodology: .
 
 ;
 proc logistic data=MJ_LJ_analytic_file descending;
@@ -148,11 +142,11 @@ footnote;
 *******************************************************************************;
 
 title1
-"Research Question: What are the games with most scores for the 2 great players?"
+"Research Question: Which player had the higher steals - to - fouls ratio??"
 ;
 
 title2
-"Rationale: This is a different way of slicing the data."
+"Rationale: This is a measure of defensive efficiency."
 ;
 
 footnote1
@@ -182,7 +176,7 @@ run;
 proc means data=MJ_LJ_Margin sum;
 	var MarginNum;
 	class Player;
-	*output out=MJ_LJ_Margin sum=MarginTotal;
+
 run;
 
 title;
