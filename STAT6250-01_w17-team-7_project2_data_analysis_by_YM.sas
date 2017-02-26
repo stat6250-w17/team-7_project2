@@ -75,15 +75,10 @@ Note:
 Methodology: 
 
 ;
-proc means data=MJ_LJ_analytic_file sum noprint;
-	var FGA;
-	class Player;
-	output out=MJ_LJ_TSperc sum=FGAtotal;
+proc 
 run;
 
-data MJ_LJ_TSperc;
-	set MJ_LJ_TSperc;
-	TSperc = (PTStotal /FGAtotal)*100 );
+data
 run;
 
 proc print data=MJ_LJ_TSperc;
@@ -128,10 +123,7 @@ Note:
 Methodology: .
 
 ;
-proc logistic data=MJ_LJ_analytic_file descending;
-	by Player notsorted;
-    model Result = USGperc;
-run;
+proc 
 
 title;
 footnote;
@@ -167,17 +159,10 @@ Note:
 Methodology: 
 
 ;
-data MJ_LJ_Margin;
-	set MJ_LJ_analytic_file;
-	MarginNum = input(Margin, 8.0);
-	if Result = 'L' then MarginNum = -1 * MarginNum;
-run;
 
-proc means data=MJ_LJ_Margin sum;
-	var MarginNum;
-	class Player;
 
-run;
+proc 
+
 
 title;
 footnote;
