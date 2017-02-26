@@ -168,3 +168,75 @@ https://github.com/stat6250/team-7_project2/blob/master/data/lebron_james_adv.tx
     &inputDataset4URL.,
     &inputDataset4Type.
 )
+
+*Horizontally merge Michael data;
+data michael_merged;
+	merge michael_basic_raw michael_adv_raw;
+	by Date;
+	Player = "Michael Jordan"; *add Player attribute;
+	Result = scan(Margin,1); *seperate Margin into 2 variables;
+	Margin = scan(Margin,2);
+run;
+
+* Horizontally merge Lebron data;
+data lebron_merged;
+	merge lebron_basic_raw lebron_adv_raw;
+	by Date;
+	Player = "Lebron James"; *add Player attribute;
+	Result = scan(Margin,1); *seperate Margin into 2 variables;
+	Margin = scan(Margin,2);
+run;
+
+* Vertically merge the Michael and Lebron data;
+proc append base=michael_merged data=lebron_merged force;
+run;
+
+* build analytic dataset from raw datasets with the least number of columns and
+minimal cleaning/transformation needed to address research questions in
+corresponding data-analysis files;
+
+data MJ_LJ_analytic_file;
+	retain
+		Player
+		Date
+		Result
+		Margin
+		MP
+		FG
+		FGA
+		ThreeP
+		ThreePA
+		FT
+		FTA
+		TRB
+		AST
+		STL
+		BLK
+		TOV
+		PF
+		PTS
+		USGperc
+	;
+	keep
+		Player
+		Date
+		Result
+		Margin
+		MP
+		FG
+		FGA
+		ThreeP
+		ThreePA
+		FT
+		FTA
+		TRB
+		AST
+		STL
+		BLK
+		TOV
+		PF
+		PTS
+		USGperc
+	;
+	set michael_merged;
+run;
