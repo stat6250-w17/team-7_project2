@@ -42,6 +42,14 @@ relative file import path to the current directory, if using Windows;
 %mend;
 %setup
 
+Research questions:
+
+1. Which player had the higher overall FG percentage? (Rationale: Shooting is a fundamental point of comparison for basketball players).
+
+2. Which player had the had the higher points scored - to - minutes played ratio? (Rationale: This is a measure of offensive efficiency)
+
+3. Which player had the higher steals - to - fouls ratio? (Rationale: This is a measure of defensive efficiency)
+
 *******************************************************************************;
 * Research Question Analysis Starting Point;
 *******************************************************************************;
@@ -52,6 +60,7 @@ title1
 
 title2
 "Rationale: The 2 great players can be assessed based on their dribbles that resulted in scores."
+
 ;
 
 footnote1
