@@ -94,11 +94,14 @@ proc print data = MJ_LJ_analytic_file;
 	where Player = "Michael Jordan";
 	sum PTS;
 run;
-data points_made rename =(PTS = Points);
+data points_made (rename =(PTS = Points));
 run;
   
 proc print noobs data = points_made(obs=5);
 run;
+proc sql;
+select player, avg(PTS)as Points from MJ_LJ_analytic_file group by player;
+quit;
 
 title;
 footnote;
