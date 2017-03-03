@@ -77,28 +77,7 @@ footnote1
 Methodology: use Proc Means to calculate the sum of total points (PTS) for each player
 Note: Refer to topics on proc mean. 
 ;
-proc sort data = MJ_LJ_analytic_file out = srtd_MJ_LJ_analytic_file;
-	by player;
-run;
-proc print data = srtd_MJ_LJ_analytic_file;
-	var PTS;
-	id Player;
-	where Player = "Lebron James";
-	sum PTS;
-	*output out = points_made;
-run;
 
-proc print data = MJ_LJ_analytic_file;
-	var PTS;
-	id Player;
-	where Player = "Michael Jordan";
-	sum PTS;
-run;
-data points_made (rename =(PTS = Points));
-run;
-  
-proc print noobs data = points_made(obs=5);
-run;
 proc sql;
 select player, avg(PTS)as Points from MJ_LJ_analytic_file group by player;
 quit;
@@ -126,12 +105,12 @@ footnote1
 *
 Note: 
 
-Methodology: Sum up the scores for both the players
+Methodology: Use proc sgplot to plot the points made (PTS) over minutes played for the 2 players to provide a visual comparison of the 2. 
 
 ;
 
-  
-proc print noobs data=sum_of_points_of_each_player(obs=1);
+proc sgplot data=Mj_lj_analytic_file;
+  scatter x=MP y=PTS / group=Player;
 run;
 
 title;
