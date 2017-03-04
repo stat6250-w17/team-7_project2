@@ -191,6 +191,12 @@ run;
 proc append base=michael_merged data=lebron_merged force;
 run;
 
+data michael_merged;
+	set michael_merged;
+	MarginNum = input(Margin, 8.0);
+	if Result = 'L' then MarginNum = -1 * MarginNum;
+run;
+
 * build analytic dataset from raw datasets with the least number of columns and
 minimal cleaning/transformation needed to address research questions in
 corresponding data-analysis files;
@@ -200,7 +206,7 @@ data MJ_LJ_analytic_file;
 		Player
 		Date
 		Result
-		Margin
+		MarginNum
 		MP
 		FG
 		FGA
@@ -221,7 +227,7 @@ data MJ_LJ_analytic_file;
 		Player
 		Date
 		Result
-		Margin
+		MarginNum
 		MP
 		FG
 		FGA
