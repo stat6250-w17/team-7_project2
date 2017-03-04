@@ -73,17 +73,25 @@ footnote3
 Note: 
 Methodology: 
 ;
-proc sql;
-  select 
-    player_name, 
-    avg(FG/FGA) as fg_perc 
-  from 
-    MJ_LJ_analytic_file
-  group by player_name
-  order by fg_perc desc;
-  
-quit;
+proc sort data=MJ_LJ_analytic_file; by player;
 
+proc means data=MJ_LJ_analytic_file mean noprint;
+	var FG FGA;
+	class Player;
+	
+	output out=FGP mean=AvgFG AvgFGA
+RUN;
+
+data FGP;
+	set FGP;
+	FGperc = (AvgFG/AvgFGA)*100;
+run;
+
+proc print data = FGP;
+	id player;
+	var FGperc;
+	where not(missing(Player));
+run;
 title;
 footnote;
 
@@ -118,16 +126,25 @@ footnote3
 Note: 
 Methodology: .
 ;
-proc sql;
-  select 
-    player_name, 
-    (sum(MP)/sum(GmSc)) as MPR
-  from 
-    MJ_LJ_analytic_file
-  group by player_name
-  order by MPR desc;
-  
-quit;
+proc sort data=MJ_LJ_analytic_file; by player;
+
+proc means data=MJ_LJ_analytic_file sum noprint;
+	var PTS MP;
+	class Player;
+	
+	output out=PSratio sum=SumPTS SumMP
+RUN;
+
+data PSratio;
+	set PSratio;
+	PSR = (SumMP/SumPTS);
+run;
+
+proc print data = PSratio;
+	id player;
+	var PSR;
+	where not(missing(Player));
+run;
 
 title;
 footnote;
@@ -162,17 +179,27 @@ Note:
 Methodology: 
 ;
 
+proc sort data=MJ_LJ_analytic_file; by player;
 
-proc sql;
-  select 
-    player_name, 
-    (sum(MP)/sum(PF)) as Fouls_Ratio
-  from 
-    MJ_LJ_analytic_file
-  group by player_name
-  order by Fouls_Ratio desc;
-  
-quit;
+proc means data=MJ_LJ_analytic_file sum noprint;
+	var STL PF;
+	class Player;
+	
+	output out=PFratio sum=SumSTL SumPF
+RUN;
+
+data PFratio;
+	set PFratio;
+	PFR = (SumSTL/SumPF);
+run;
+
+proc print data = PFratio;
+	id player;
+	var PFR;
+	where not(missing(Player));
+run;
+
+
 
 
 title;
