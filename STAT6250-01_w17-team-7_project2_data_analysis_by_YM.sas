@@ -58,7 +58,7 @@ title2
 ;
 
 footnote1
-""
+"The Player with Highest FG percentage is Lebron James."
 ;
 
 footnote2
@@ -111,7 +111,7 @@ title2
 ;
 
 footnote1
-""
+"Lebron James seems to maintain a better Minutes to Point Scored Ratio"
 ;
 
 footnote2
@@ -137,7 +137,7 @@ RUN;
 
 data PSratio;
 	set PSratio;
-	PSR = (SumMP/SumPTS);
+	PSR = (SumPTS/SumMP);
 run;
 
 proc print data = PSratio;
@@ -163,7 +163,7 @@ title2
 ;
 
 footnote1
-""
+"In this metric, Michael Jordan seems to have beaten Lebron James"
 ;
 
 footnote2
