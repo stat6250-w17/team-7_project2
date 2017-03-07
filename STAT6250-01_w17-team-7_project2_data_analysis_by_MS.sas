@@ -82,6 +82,14 @@ proc sql;
 select player, avg(PTS)as Points from MJ_LJ_analytic_file group by player;
 quit;
 
+proc means data=Mj_lj_analytic_file sum noprint;
+proc ttest data=Mj_lj_analytic_file sides=2 alpha=0.05 h0=0;
+title "stuff";
+	class player;
+	var PTS;
+run;
+
+
 title;
 footnote;
 
