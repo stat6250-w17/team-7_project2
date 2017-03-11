@@ -258,3 +258,56 @@ data MJ_LJ_TSperc;
 	set MJ_LJ_TSperc;
 	TSperc = PTStotal / ( 2 * (FGAtotal + (0.44*FTAtotal) ) );
 run;
+
+
+
+* ### YM Question 1, data prep ### ;
+
+proc sort data=MJ_LJ_analytic_file; by player;
+
+proc means data=MJ_LJ_analytic_file mean noprint;
+	var FG FGA;
+	class Player;
+	
+	output out=FGP mean=AvgFG AvgFGA
+run;
+
+data FGP;
+	set FGP;
+	FGperc = (AvgFG/AvgFGA)*100;
+run;
+
+
+* ### YM Question 2, data prep ### ;
+
+proc sort data=MJ_LJ_analytic_file; by player;
+
+proc means data=MJ_LJ_analytic_file sum noprint;
+	var PTS MP;
+	class Player;
+	
+	output out=PSratio sum=SumPTS SumMP
+run;
+
+data PSratio;
+	set PSratio;
+	PSR = (SumMP/SumPTS);
+run;
+
+* ### YM Question 3, data prep ### ;
+
+
+proc sort data=MJ_LJ_analytic_file; by player;
+
+proc means data=MJ_LJ_analytic_file sum noprint;
+	var STL PF;
+	class Player;
+	
+	output out=PFratio sum=SumSTL SumPF
+run;
+
+data PFratio;
+	set PFratio;
+	PFR = (SumSTL/SumPF);
+run;
+
