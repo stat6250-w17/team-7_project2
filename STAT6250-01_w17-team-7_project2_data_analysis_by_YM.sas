@@ -25,7 +25,7 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 
 *******************************************************************************;
-* Research Question Analysis Starting Point;
+* Research Question 1 Analysis ;
 *******************************************************************************;
 
 title1
@@ -80,7 +80,7 @@ title;
 footnote;
 
 *******************************************************************************;
-* Research Question Analysis Starting Point;
+* Research Question 2 Analysis ;
 *******************************************************************************;
 
 title1
@@ -132,7 +132,7 @@ footnote;
 
 
 *******************************************************************************;
-* Research Question Analysis Starting Point;
+* Research Question 3 Analysis;
 *******************************************************************************;
 
 title1
