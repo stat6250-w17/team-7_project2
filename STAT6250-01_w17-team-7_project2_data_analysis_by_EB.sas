@@ -26,25 +26,14 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 title1 'Research Question: Which player had the higher True Shooting Percentage?';
 title2 'Rationale: This includes 2-point, 3-point, and FT attempts to give the most complete measure of who is a better shooter.';
-footnote1 'The player with the higest True Shooting Percentage is displayed';
-
+footnote1 'Lebron James has the higher True Shooting Percentage';
 *
 Methodology: For each player the calculate TS% = Points/( 2 * (FGA+(0.44*FTA) ) )
 I will create new variables for total points, total Field Goal attempts, 
-and total free throw attempts. The data is sorted so the higher TS% is the
-first observation and this is displayed.
+and total free throw attempts. This result is stored in MJ_LJ_TSperc.
+The data is sorted and displayed with the higher TS% as the
+first observation.
 ;
-
-proc means data=MJ_LJ_analytic_file sum noprint;
-	var PTS FGA FTA;
-	class Player;
-	output out=MJ_LJ_TSperc sum=PTStotal FGAtotal FTAtotal;
-run;
-
-data MJ_LJ_TSperc;
-	set MJ_LJ_TSperc;
-	TSperc = PTStotal / ( 2 * (FGAtotal + (0.44*FTAtotal) ) );
-run;
 
 proc print data=MJ_LJ_TSperc;
 	id Player;
@@ -59,53 +48,44 @@ footnote;
 
 title1 'Which players Usage Rate had higher correlation with their team winning the game?';
 title2 'Rationale: Great players heavily influence the outcome of games and should help their teams win.';
-footnote1 'The player whose Usage Rate has a higher correlation to winning is displayed';
-
+footnote1 'As seen in the scatterplots, there is not much correlation between USGperc and Margin of Victory. This runs counter to what I originally believed.';
 *
-Methodology: Use PROC LOGISTIC to compute a simple binary regession model 
-with this factor: Usage Rate as it relates to individual game wins.
+Methodology: Use PROC CORR to compute correlation and dispaly plots 
+between Margin of Victory and Usage Rate Percentage for each player. 
 ;
-
-proc logistic data=MJ_LJ_analytic_file descending;
+ods graphics on;
+proc corr data=MJ_LJ_analytic_file pearson 
+		plots=matrix(histogram)
+		nosimple;
 	by Player notsorted;
-    model Result = USGperc;
+    var MarginNum USGperc;
 run;
-
-/*
-data USG_corr;
-	set MJ_LJ_analytic_file;
-	if Result = 'W' then ResultBin = 1;
-	else ResultBin = 0;
-run;
-
-proc corr data=USG_corr;
-	by Player notsorted;
-    var ResultBin USGperc;
-run;*/
+ods graphics off;
 
 title;
 footnote;
 
 
-title1 'Which player had the higher average margin of victory during the season?';
-title2 'Rationale: Both players teams had winning records, but we want to see which team was truly dominating opponents.';
-footnote1 'The player with the higher margin of victory is displayed';
-
+title1 'Which player had the higher average margin of victory during the seasons?';
+title2 'Rationale: Both teams had winning records, but we want to see which team was truly dominating opponents.';
+footnote1 'Michael Jordan had the higher margin of victory';
 *
-Methodology: Extract the numeric value from the Margin attribute.
-Sum this value for each player and display the player with the higher value.
+Methodology: Using the numeric value in MarginNum, calculate the mean 
+for each player.
 ;
 
-data MJ_LJ_Margin;
-	set MJ_LJ_analytic_file;
-	MarginNum = input(Margin, 8.0);
-	if Result = 'L' then MarginNum = -1 * MarginNum;
-run;
-
-proc means data=MJ_LJ_Margin sum;
+proc means data=MJ_LJ_analytic_file noprint nway;
 	var MarginNum;
 	class Player;
-	*output out=MJ_LJ_Margin sum=MarginTotal;
+	output out=MJ_LJ_MarginAvg mean=MarginAvg n=NumGames;
+run;
+
+proc sort data=MJ_LJ_MarginAvg;
+	by descending MarginAvg;
+run;
+
+proc print noobs data=MJ_LJ_MarginAvg;
+	var Player MarginAvg NumGames;
 run;
 
 title;
