@@ -53,19 +53,6 @@ footnote3
 Note: 
 Methodology: 
 ;
-proc sort data=MJ_LJ_analytic_file; by player;
-
-proc means data=MJ_LJ_analytic_file mean noprint;
-	var FG FGA;
-	class Player;
-	
-	output out=FGP mean=AvgFG AvgFGA
-RUN;
-
-data FGP;
-	set FGP;
-	FGperc = (AvgFG/AvgFGA)*100;
-run;
 
 proc print data = FGP;
 	id player;
