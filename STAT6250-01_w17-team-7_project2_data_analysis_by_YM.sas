@@ -54,25 +54,13 @@ Note:
 Methodology: Use proc means to calculate the FG percentage
 ;
 
-proc sort data=MJ_LJ_analytic_file; by player;
-
-proc means data=MJ_LJ_analytic_file mean noprint;
-	var FG FGA;
-	class Player;
-	
-	output out=FGP mean=AvgFG AvgFGA
-run;
-
-data FGP;
-	set FGP;
-	FGperc = (AvgFG/AvgFGA)*100;
-run;
 
 proc print data = FGP;
 	id player;
 	var FGperc;
 	where not(missing(Player));
 run;
+
 title;
 footnote;
 
@@ -107,19 +95,7 @@ footnote3
 Note: 
 Methodology: Use means to calculate the sum of total points and minutes played by each player to get a ratio
 ;
-proc sort data=MJ_LJ_analytic_file; by player;
 
-proc means data=MJ_LJ_analytic_file sum noprint;
-	var PTS MP;
-	class Player;
-	
-	output out=PSratio sum=SumPTS SumMP
-run;
-
-data PSratio;
-	set PSratio;
-	PSR = (SumPTS/SumMP);
-run;
 
 proc print data = PSratio;
 	id player;
@@ -160,19 +136,6 @@ Note:
 Methodology: Use proc means to calculate the sume of total steals and total player fouls to get steals to foul ratio
 ;
 
-proc sort data=MJ_LJ_analytic_file; by player;
-
-proc means data=MJ_LJ_analytic_file sum noprint;
-	var STL PF;
-	class Player;
-	
-	output out=PFratio sum=SumSTL SumPF
-run;
-
-data PFratio;
-	set PFratio;
-	PFR = (SumSTL/SumPF);
-run;
 
 proc print data = PFratio;
 	id player;
