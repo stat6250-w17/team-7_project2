@@ -246,3 +246,15 @@ data MJ_LJ_analytic_file;
 	;
 	set michael_merged;
 run;
+
+*For use in finding player with best True Shooting Percentage;
+proc means data=MJ_LJ_analytic_file sum noprint;
+	var PTS FGA FTA;
+	class Player;
+	output out=MJ_LJ_TSperc sum=PTStotal FGAtotal FTAtotal;
+run;
+
+data MJ_LJ_TSperc;
+	set MJ_LJ_TSperc;
+	TSperc = PTStotal / ( 2 * (FGAtotal + (0.44*FTAtotal) ) );
+run;
