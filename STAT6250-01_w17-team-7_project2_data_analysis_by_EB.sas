@@ -23,9 +23,14 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 * load external file that generates analytic dataset;
 %include '.\STAT6250-01_w17-team-7_project2_data_preparation.sas';
 
-
-title1 'Research Question: Which player had the higher True Shooting Percentage?';
+*IL: put long string literals on separate lines;
+title1
+'Research Question: Which player had the higher True Shooting Percentage?'
+;
 title2 'Rationale: This includes 2-point, 3-point, and FT attempts to give the most complete measure of who is a better shooter.';
+*IL: consider expanding analyses to include more context, to include specific
+     values to highlight from the SAS output, and to provide context for the
+     significance of the numbers;
 footnote1 'Lebron James has the higher True Shooting Percentage';
 *
 Methodology: For each player the calculate TS% = Points/( 2 * (FGA+(0.44*FTA) ) )
@@ -36,9 +41,9 @@ first observation.
 ;
 
 proc print data=MJ_LJ_TSperc;
-	id Player;
-	var TSperc;
-	where not(missing(Player));
+    id Player;
+    var TSperc;
+    where not(missing(Player));
 run;
 
 title;
@@ -53,11 +58,12 @@ footnote1 'As seen in the scatterplots, there is not much correlation between US
 Methodology: Use PROC CORR to compute correlation and dispaly plots 
 between Margin of Victory and Usage Rate Percentage for each player. 
 ;
+*IL: ods graphics on/off isn't needed;
 ods graphics on;
 proc corr data=MJ_LJ_analytic_file pearson 
-		plots=matrix(histogram)
-		nosimple;
-	by Player notsorted;
+        plots=matrix(histogram)
+        nosimple;
+    by Player notsorted;
     var MarginNum USGperc;
 run;
 ods graphics off;
@@ -75,17 +81,17 @@ for each player.
 ;
 
 proc means data=MJ_LJ_analytic_file noprint nway;
-	var MarginNum;
-	class Player;
-	output out=MJ_LJ_MarginAvg mean=MarginAvg n=NumGames;
+    var MarginNum;
+    class Player;
+    output out=MJ_LJ_MarginAvg mean=MarginAvg n=NumGames;
 run;
 
 proc sort data=MJ_LJ_MarginAvg;
-	by descending MarginAvg;
+    by descending MarginAvg;
 run;
 
 proc print noobs data=MJ_LJ_MarginAvg;
-	var Player MarginAvg NumGames;
+    var Player MarginAvg NumGames;
 run;
 
 title;
