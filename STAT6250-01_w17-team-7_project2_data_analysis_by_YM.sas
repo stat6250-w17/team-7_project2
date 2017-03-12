@@ -90,7 +90,7 @@ footnote3
 
 *
 Note: 
-Methodology: Use means to calculate the sum of total points and minutes played by each player to get a ratio
+Methodology: Use means to calculate the Average of total points and minutes played by each player to get a ratio
 ;
 
 
@@ -130,7 +130,7 @@ footnote3
 
 *
 Note: 
-Methodology: Use proc means to calculate the sume of total steals and total player fouls to get steals to foul ratio
+Methodology: Use proc means to calculate the sum of total steals and total player fouls to get steals to foul ratio
 ;
 
 
