@@ -163,7 +163,7 @@ title2
 ;
 
 footnote1
-"Lebron James or Michael Jordan"
+"Lebron James has higher True Shooting Percentage"
 ;
 
 footnote2
