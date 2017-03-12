@@ -311,3 +311,20 @@ data PFratio;
 	PFR = (SumSTL/SumPF);
 run;
 
+
+* Trying TS% ;
+
+proc sort data=MJ_LJ_analytic_file; by player;
+
+proc means data=MJ_LJ_analytic_file sum noprint;
+	var FGA FTA PTS;
+	class Player;
+	
+	output out=TSPerc sum=SumFGA SumFTA SumPTS
+run;
+
+data TSPerc;
+	set TSPerc;
+	TSP = (SumPTS/(2*(FGA+(0.44*sumFTA)));
+run;
+
