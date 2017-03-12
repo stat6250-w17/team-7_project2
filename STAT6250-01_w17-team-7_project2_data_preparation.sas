@@ -282,16 +282,16 @@ run;
 
 proc sort data=MJ_LJ_analytic_file; by player;
 
-proc means data=MJ_LJ_analytic_file sum noprint;
+proc means data=MJ_LJ_analytic_file mean noprint;
 	var PTS MP;
 	class Player;
 	
-	output out=PSratio sum=SumPTS SumMP
+	output out=PSratio mean=AvgPTS AvgMP
 run;
 
 data PSratio;
 	set PSratio;
-	PSR = (SumMP/SumPTS);
+	PSR = (AvgMP/AvgPTS);
 run;
 
 * ### YM Question 3, data prep ### ;
