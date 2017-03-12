@@ -36,14 +36,11 @@ title2
 ;
 
 footnote1
-"the average time played per game for each player is xxxx"
+"The average time played per game for MJ is 38:20:07 and for LJ is 37:42:17"
 ;
 
 *
-Note: 
-
 Methodology: use Proc Means to calculate the sum of Minutes Played (MP) for each player. 
-
 ;
 proc means data=MJ_LJ_analytic_file sum noprint;
 	var MP;
@@ -70,7 +67,7 @@ title2
 ;
 
 footnote1
-" the average points made for both the players is XXXX"
+"The average points made for both the players is 28.0722 points"
 ;
 
 *
@@ -89,10 +86,8 @@ title "stuff";
 	var PTS;
 run;
 
-
 title;
 footnote;
-
 
 *******************************************************************************;
 * Research Question Analysis Starting Point;
@@ -111,10 +106,7 @@ footnote1
 ;
 
 *
-Note: 
-
 Methodology: Use proc sgplot to plot the points made (PTS) over minutes played for the 2 players to provide a visual comparison of the 2. 
-
 ;
 
 proc sgplot data=Mj_lj_analytic_file;
