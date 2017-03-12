@@ -145,3 +145,50 @@ run;
 
 title;
 footnote;
+
+
+
+
+
+*******************************************************************************;
+* Research Question 4 Analysis;
+*******************************************************************************;
+
+title1
+"Research Question: Which player had the higher True Shooting Percentage?"
+;
+
+title2
+"Rationale: This is a measure of offensiv efficiency."
+;
+
+footnote1
+"Lebron James or Michael Jordan"
+;
+
+footnote2
+""
+;
+
+footnote3
+""
+;
+
+*
+Note: 
+Methodology: Use proc means to calculate the sum of total steals and total player fouls to get steals to foul ratio
+;
+
+
+proc print data = TSPerc;
+	id player;
+	var TSP;
+	where not(missing(Player));
+run;
+
+
+
+
+title;
+footnote;
+
