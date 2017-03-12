@@ -77,7 +77,7 @@ title2
 ;
 
 footnote1
-"Lebron James seems to maintain a better Minutes to Point Scored Ratio"
+"Michael Jordan Seems to have a better shooting ratio since he takes less time to score points"
 ;
 
 footnote2
@@ -117,7 +117,7 @@ title2
 ;
 
 footnote1
-"In this metric, Michael Jordan seems to have beaten Lebron James"
+"Lebron James seems to have Higher Steals and Lower Fouls"
 ;
 
 footnote2
