@@ -10,6 +10,7 @@ players to ever live: Michael Jordan and Lebron James
 Dataset Name: MJ_LJ_analytic_file created in external file
 STAT6250-01_w17-team-7_project2_data_preparation.sas, which is assumed to be
 in the same directory as this file
+
 See included file for dataset properties
 ;
 
@@ -23,7 +24,7 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 
 *******************************************************************************;
-* Research Question Analysis Starting Point;
+* Research Question 1 Analysis ;
 *******************************************************************************;
 
 title1
@@ -49,35 +50,21 @@ footnote3
 
 *
 Note: 
-Methodology: 
+Methodology: Use proc means to calculate the FG percentage
 ;
-proc sort data=MJ_LJ_analytic_file; by player;
 
-proc means data=MJ_LJ_analytic_file mean noprint;
-	var FG FGA;
-	class Player;
-	
-	output out=FGP mean=AvgFG AvgFGA
-RUN;
-
-data FGP;
-	set FGP;
-	FGperc = (AvgFG/AvgFGA)*100;
-run;
 
 proc print data = FGP;
 	id player;
 	var FGperc;
 	where not(missing(Player));
 run;
-title;
-footnote;
 
 title;
 footnote;
 
 *******************************************************************************;
-* Research Question Analysis Starting Point;
+* Research Question 2 Analysis ;
 *******************************************************************************;
 
 title1
@@ -102,21 +89,9 @@ footnote3
 
 *
 Note: 
-Methodology: .
+Methodology: Use means to calculate the sum of total points and minutes played by each player to get a ratio
 ;
-proc sort data=MJ_LJ_analytic_file; by player;
 
-proc means data=MJ_LJ_analytic_file sum noprint;
-	var PTS MP;
-	class Player;
-	
-	output out=PSratio sum=SumPTS SumMP
-RUN;
-
-data PSratio;
-	set PSratio;
-	PSR = (SumPTS/SumMP);
-run;
 
 proc print data = PSratio;
 	id player;
@@ -129,7 +104,7 @@ footnote;
 
 
 *******************************************************************************;
-* Research Question Analysis Starting Point;
+* Research Question 3 Analysis;
 *******************************************************************************;
 
 title1
@@ -154,22 +129,9 @@ footnote3
 
 *
 Note: 
-Methodology: 
+Methodology: Use proc means to calculate the sume of total steals and total player fouls to get steals to foul ratio
 ;
 
-proc sort data=MJ_LJ_analytic_file; by player;
-
-proc means data=MJ_LJ_analytic_file sum noprint;
-	var STL PF;
-	class Player;
-	
-	output out=PFratio sum=SumSTL SumPF
-RUN;
-
-data PFratio;
-	set PFratio;
-	PFR = (SumSTL/SumPF);
-run;
 
 proc print data = PFratio;
 	id player;
