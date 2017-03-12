@@ -325,6 +325,6 @@ run;
 
 data TSPerc;
 	set TSPerc;
-	TSP = (SumPTS/(2*(FGA+(0.44*sumFTA)));
+	TSP = (SumPTS/(2*(SumFGA+(0.44*sumFTA))))*100;
 run;
 
