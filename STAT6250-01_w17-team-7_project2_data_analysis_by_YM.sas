@@ -41,13 +41,6 @@ footnote1
 "The Player with Highest FG percentage is Lebron James."
 ;
 
-footnote2
-""
-;
-
-footnote3
-""
-;
 
 *
 Note: 
@@ -80,13 +73,6 @@ footnote1
 "Michael Jordan Seems to have a better shooting ratio since he takes less time to score points"
 ;
 
-footnote2
-""
-;
-
-footnote3
-""
-;
 
 *
 Note: 
@@ -120,13 +106,6 @@ footnote1
 "Lebron James seems to have Higher Steals and Lower Fouls"
 ;
 
-footnote2
-""
-;
-
-footnote3
-""
-;
 
 *
 Note: 
@@ -166,13 +145,6 @@ footnote1
 "Lebron James has higher True Shooting Percentage"
 ;
 
-footnote2
-""
-;
-
-footnote3
-""
-;
 
 *
 Note: 
@@ -209,13 +181,6 @@ footnote1
 "LJ/MJ??"
 ;
 
-footnote2
-""
-;
-
-footnote3
-""
-;
 
 *
 Note: 
