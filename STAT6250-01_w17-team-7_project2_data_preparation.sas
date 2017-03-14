@@ -328,3 +328,16 @@ data TSPerc;
 	TSP = (SumPTS/(2*(SumFGA+(0.44*sumFTA))))*100;
 run;
 
+
+proc means data=MJ_LJ_analytic_file sum noprint;
+	var FGA FTA TOV;
+	class Player;
+	
+	output out=TOVPerc sum=SumFGA SumFTA SumTOV
+run;
+
+data TOVPerc;
+	set TOVPerc;
+	TOVP = (SumTOV/(2*(SumFGA+(0.44*sumFTA)+SumTOV)))*100;
+run;
+
