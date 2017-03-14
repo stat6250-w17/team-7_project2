@@ -42,13 +42,9 @@ footnote1
 *
 Methodology: use Proc Means to calculate the sum of Minutes Played (MP) for each player. 
 ;
-proc means data=MJ_LJ_analytic_file sum noprint;
+proc means data=MJ_LJ_analytic_file sum;
 	var MP;
 	class Player;
-	output out= mins_played;
-run;
-  
-proc print noobs data = mins_played(obs=5);
 run;
 
 title;
@@ -81,7 +77,7 @@ quit;
 
 proc means data=Mj_lj_analytic_file sum noprint;
 proc ttest data=Mj_lj_analytic_file sides=2 alpha=0.05 h0=0;
-title "stuff";
+title "T Test Analysis";
 	class player;
 	var PTS;
 run;
