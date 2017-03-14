@@ -192,3 +192,46 @@ run;
 title;
 footnote;
 
+
+*******************************************************************************;
+* Research Question 5 Analysis;
+*******************************************************************************;
+
+title1
+"Research Question: Which player had the higher Turn Over Percentage?"
+;
+
+title2
+"Rationale: This is a measure of offensiv efficiency."
+;
+
+footnote1
+"LJ/MJ??"
+;
+
+footnote2
+""
+;
+
+footnote3
+""
+;
+
+*
+Note: 
+Methodology: Use proc means to calculate the sum of total steals and total player fouls to get steals to foul ratio
+;
+
+
+proc print data = TOVPerc;
+	id player;
+	var TOVP;
+	where not(missing(Player));
+run;
+
+
+
+
+title;
+footnote;
+
