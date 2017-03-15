@@ -265,16 +265,16 @@ run;
 
 proc sort data=MJ_LJ_analytic_file; by player;
 
-proc means data=MJ_LJ_analytic_file mean noprint;
-	var FG FGA;
+proc means data=MJ_LJ_analytic_file sum noprint;
+	var FG FGA ThreeP;
 	class Player;
 	
-	output out=FGP mean=AvgFG AvgFGA
+	output out=FGP sum=SumFG SumFGA SumThreeP
 run;
 
 data FGP;
 	set FGP;
-	FGperc = (AvgFG/AvgFGA)*100;
+	FGperc = (SumFG+0.5*SumThreeP)/SumFGA)*100;
 run;
 
 
