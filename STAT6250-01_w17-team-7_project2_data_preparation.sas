@@ -261,7 +261,7 @@ run;
 
 
 
-* ### YM Question 1, data prep ### ;
+* ### YM Question 1, data prep, Effective Field Goal Percentage ### ;
 
 proc sort data=MJ_LJ_analytic_file; by player;
 
@@ -278,41 +278,7 @@ data FGP;
 run;
 
 
-* ### YM Question 2, data prep ### ;
-
-proc sort data=MJ_LJ_analytic_file; by player;
-
-proc means data=MJ_LJ_analytic_file mean noprint;
-	var PTS MP;
-	class Player;
-	
-	output out=PSratio mean=AvgPTS AvgMP
-run;
-
-data PSratio;
-	set PSratio;
-	PSR = (AvgMP/AvgPTS);
-run;
-
-* ### YM Question 3, data prep ### ;
-
-
-proc sort data=MJ_LJ_analytic_file; by player;
-
-proc means data=MJ_LJ_analytic_file sum noprint;
-	var STL PF;
-	class Player;
-	
-	output out=PFratio sum=SumSTL SumPF
-run;
-
-data PFratio;
-	set PFratio;
-	PFR = (SumSTL/SumPF);
-run;
-
-
-* Trying TS% ;
+* Question 2, True Shooting Percentage ;
 
 proc sort data=MJ_LJ_analytic_file; by player;
 
@@ -328,6 +294,7 @@ data TSPerc;
 	TSP = (SumPTS/(2*(SumFGA+(0.44*sumFTA))))*100;
 run;
 
+* Question 3, Turnover Percentage;
 
 proc means data=MJ_LJ_analytic_file sum noprint;
 	var FGA FTA TOV;
@@ -340,4 +307,5 @@ data TOVPerc;
 	set TOVPerc;
 	TOVP = (SumTOV/(2*(SumFGA+(0.44*sumFTA)+SumTOV)))*100;
 run;
+
 
