@@ -274,7 +274,7 @@ run;
 
 data FGP;
 	set FGP;
-	FGperc = (SumFG+0.5*SumThreeP)/SumFGA)*100;
+	FGperc = ((SumFG+0.5*SumThreeP)/SumFGA)*100;
 run;
 
 
