@@ -30,7 +30,7 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 title1
 "Research Question 1: Which player has higher overall Effective Field Goal 
-percentage?"
+ percentage?"
 ;
 
 title2
@@ -40,13 +40,13 @@ title2
 
 footnote1
 "Effective Field Goal Percentage is a statistic that adjusts for the fact that  a
-3-point field goal is worth more than a 2-point field goal."
+ 3-point field goal is worth more than a 2-point field goal."
 ;
 
 footnote2
-"Lebron James is leading this statistic, however more analysis should be done on
-overall Field Goal Percentage to make sure that he maintains overall lead in 
-Field Goals."
+"Lebron James is leading this statistic, however, more analysis should be done on
+ overall Field Goal Percentage to make sure that he maintains overall lead in 
+ Field Goals."
 ;
 
 *
@@ -82,14 +82,14 @@ title2
 
 footnote1
 "True Shooting Percentage measures the overall accuracy of shooting the ball and
-is considered more accurate than Field Goal Percentage, Three Point Field Goal
-Percentage and Free Throws Percentage measured individually."
+ is considered more accurate than Field Goal Percentage, Three Point Field Goal
+ Percentage and Free Throws Percentage measured individually."
 ;
 
 footnote2
 "Lebron James seems to be leading this measure by a wide margin and he is also
-leading in all other individual shooting measures thus maintaining a comfortable
-lead in shooting efficiency over Michael Jordan."
+ leading in all other individual shooting measures thus maintaining a comfortable
+ lead in shooting efficiency over Michael Jordan."
 ;
 
 *
@@ -125,14 +125,14 @@ title2
 
 footnote1
 "This is a defensive metric which estimates the number of turnovers a player 
-commits per 100 possessions. A turnover occurs when the player loses the 
-possession of the ball to opposing team before he takes a shot at his team's
-basket."
+ commits per 100 possessions. A turnover occurs when the player loses the 
+ possession of the ball to opposing team before he takes a shot at his team's
+ basket."
 ;
 
 footnote2
 "Since Michael Jordan has lower turnovers than Lebron James, he seems to have
-a better control over the ball compared to Lebron James."
+ a better control over the ball compared to Lebron James."
 ;
 
 
