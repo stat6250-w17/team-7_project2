@@ -261,53 +261,51 @@ run;
 
 
 
-* ### YM Question 1, data prep ### ;
-
-proc sort data=MJ_LJ_analytic_file; by player;
-
-proc means data=MJ_LJ_analytic_file mean noprint;
-	var FG FGA;
-	class Player;
-	
-	output out=FGP mean=AvgFG AvgFGA
-run;
-
-data FGP;
-	set FGP;
-	FGperc = (AvgFG/AvgFGA)*100;
-run;
-
-
-* ### YM Question 2, data prep ### ;
-
-proc sort data=MJ_LJ_analytic_file; by player;
-
-proc means data=MJ_LJ_analytic_file mean noprint;
-	var PTS MP;
-	class Player;
-	
-	output out=PSratio mean=AvgPTS AvgMP
-run;
-
-data PSratio;
-	set PSratio;
-	PSR = (AvgMP/AvgPTS);
-run;
-
-* ### YM Question 3, data prep ### ;
-
+* ### YM Question 1, data prep, Effective Field Goal Percentage ### ;
 
 proc sort data=MJ_LJ_analytic_file; by player;
 
 proc means data=MJ_LJ_analytic_file sum noprint;
-	var STL PF;
+	var FG FGA ThreeP;
 	class Player;
 	
-	output out=PFratio sum=SumSTL SumPF
+	output out=FGP sum=SumFG SumFGA SumThreeP
 run;
 
-data PFratio;
-	set PFratio;
-	PFR = (SumSTL/SumPF);
+data FGP;
+	set FGP;
+	FGperc = ((SumFG+0.5*SumThreeP)/SumFGA)*100;
 run;
+
+
+* Question 2, True Shooting Percentage ;
+
+proc sort data=MJ_LJ_analytic_file; by player;
+
+proc means data=MJ_LJ_analytic_file sum noprint;
+	var FGA FTA PTS;
+	class Player;
+	
+	output out=TSPerc sum=SumFGA SumFTA SumPTS
+run;
+
+data TSPerc;
+	set TSPerc;
+	TSP = (SumPTS/(2*(SumFGA+(0.44*sumFTA))))*100;
+run;
+
+* Question 3, Turnover Percentage;
+
+proc means data=MJ_LJ_analytic_file sum noprint;
+	var FGA FTA TOV;
+	class Player;
+	
+	output out=TOVPerc sum=SumFGA SumFTA SumTOV
+run;
+
+data TOVPerc;
+	set TOVPerc;
+	TOVP = (SumTOV/(2*(SumFGA+(0.44*sumFTA)+SumTOV)))*100;
+run;
+
 

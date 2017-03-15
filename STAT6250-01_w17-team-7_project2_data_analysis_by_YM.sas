@@ -28,7 +28,8 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 *******************************************************************************;
 
 title1
-"Research Question 1: Which player had the higher overall FG percentage?"
+"Research Question 1: Which player has higher overall Effective Field Goal 
+ percentage?"
 ;
 
 title2
@@ -37,20 +38,21 @@ title2
 ;
 
 footnote1
-"The Player with Highest FG percentage is Lebron James."
+"Effective Field Goal Percentage is a statistic that adjusts for the fact that  a
+ 3-point field goal is worth more than a 2-point field goal."
 ;
 
 footnote2
-""
-;
-
-footnote3
-""
+"Lebron James is leading this statistic, however, more analysis should be done on
+ overall Field Goal Percentage to make sure that he maintains overall lead in 
+ Field Goals."
 ;
 
 *
 Note: 
-Methodology: Use proc means to calculate the FG percentage
+Methodology: Effective Field Goal Percentage (EFG%) is calculated by the formula
+(Field_Goals + 0.5*Three_Points)/Field_Goal_Attempts. This is a measure of 
+offensive ratings.
 ;
 
 
@@ -63,39 +65,44 @@ run;
 title;
 footnote;
 
+
+
 *******************************************************************************;
-* Research Question 2 Analysis ;
+* Research Question 2 Analysis;
 *******************************************************************************;
 
 title1
-"Research Question: Which player had the had the higher points scored - to - minutes played ratio?"
+"Research Question 2: Which player had the higher True Shooting Percentage?"
 ;
 
 title2
-"Rationale: This is a measure of offensive efficiency."
+"Rationale: True Shooting Percentage is a measure of offensive efficiency."
 ;
 
 footnote1
-"Michael Jordan Seems to have a better shooting ratio since he takes less time to score points"
+"True Shooting Percentage measures the overall accuracy of shooting the ball and
+ is considered more accurate than Field Goal Percentage, Three Point Field Goal
+ Percentage and Free Throws Percentage measured individually."
 ;
 
 footnote2
-""
-;
-
-footnote3
-""
+"Lebron James seems to be leading this measure by a wide margin and he is also
+ leading in all other individual shooting measures thus maintaining a comfortable
+ lead in shooting efficiency over Michael Jordan."
 ;
 
 *
 Note: 
-Methodology: Use means to calculate the Average of total points and minutes played by each player to get a ratio
+Methodology: True shooting percentage measures a players efficiency at shooting 
+the ball and is considered more accurate than Field Goal Percentage, Three Point
+Field Goal Percentage and Free Throws Percentage. It is calculated using the 
+formula Total_points/(2*True_Shooting_Attempts).
 ;
 
 
-proc print data = PSratio;
+proc print data = TSPerc;
 	id player;
-	var PSR;
+	var TSP;
 	where not(missing(Player));
 run;
 
@@ -108,34 +115,38 @@ footnote;
 *******************************************************************************;
 
 title1
-"Research Question: Which player had the higher steals - to - fouls ratio??"
+"Research Question 3: Which player had the higher Turnover Percentage?"
 ;
 
 title2
-"Rationale: This is a measure of defensive efficiency."
+"Rationale: Turnover Percentage is a measure of defensive efficiency."
 ;
 
 footnote1
-"Lebron James seems to have Higher Steals and Lower Fouls"
+"This is a defensive metric which estimates the number of turnovers a player 
+ commits per 100 possessions. A turnover occurs when the player loses the 
+ possession of the ball to opposing team before he takes a shot at his team's
+ basket."
 ;
 
 footnote2
-""
+"Since Michael Jordan has lower turnovers than Lebron James, he seems to have
+ a better control over the ball compared to Lebron James."
 ;
 
-footnote3
-""
-;
 
 *
 Note: 
-Methodology: Use proc means to calculate the sum of total steals and total player fouls to get steals to foul ratio
+Methodology: A Turnover occurs when a team loses possession of the ball to the
+opposing team before a player takes a shot at his team's basket. It can be 
+calculated by the formula Total_Turnovers/(Field_Goal_Attempts+0.44*
+Free_Throw_Attempts+Total_Turnovers)
 ;
 
 
-proc print data = PFratio;
+proc print data = TOVPerc;
 	id player;
-	var PFR;
+	var TOVP;
 	where not(missing(Player));
 run;
 
@@ -144,3 +155,4 @@ run;
 
 title;
 footnote;
+
