@@ -29,7 +29,7 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 *******************************************************************************;
 
 title1
-"Research Question 1: Which player had the higher overall FG percentage?"
+"Research Question 1: Which player had the higher overall Effective Field Goal percentage?"
 ;
 
 title2
@@ -38,7 +38,7 @@ title2
 ;
 
 footnote1
-"The Player with Highest FG percentage is Lebron James."
+"The Player with Highest Effective Field Goal percentage is Lebron James."
 ;
 
 
