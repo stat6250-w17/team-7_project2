@@ -2,11 +2,12 @@
 **************** 80-character banner for column width reference ***************;
 * (set window width to banner width to calibrate line length to 80 characters *;
 *******************************************************************************;
-
+*IL: use line breaks to create paragraphs in comment blocks;
 *
 This file uses the following analytic dataset to 
 address questions about two of the greatest basketball 
 players to ever live: Michael Jordan and Lebron James
+
 Dataset Name: MJ_LJ_analytic_file created in external file
 STAT6250-01_w17-team-7_project2_data_preparation.sas, which is assumed to be
 in the same directory as this file
@@ -26,10 +27,9 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 *******************************************************************************;
 * Research Question 1 Analysis ;
 *******************************************************************************;
-
+*IL: don't wrap string literals;
 title1
-"Research Question 1: Which player has higher overall Effective Field Goal 
- percentage?"
+"Research Question 1: Which player has higher overall Effective Field Goal percentage?"
 ;
 
 title2
@@ -57,9 +57,9 @@ offensive ratings.
 
 
 proc print data = FGP;
-	id player;
-	var FGperc;
-	where not(missing(Player));
+    id player;
+    var FGperc;
+    where not(missing(Player));
 run;
 
 title;
@@ -101,9 +101,9 @@ formula Total_points/(2*True_Shooting_Attempts).
 
 
 proc print data = TSPerc;
-	id player;
-	var TSP;
-	where not(missing(Player));
+    id player;
+    var TSP;
+    where not(missing(Player));
 run;
 
 title;
@@ -145,9 +145,9 @@ Free_Throw_Attempts+Total_Turnovers)
 
 
 proc print data = TOVPerc;
-	id player;
-	var TOVP;
-	where not(missing(Player));
+    id player;
+    var TOVP;
+    where not(missing(Player));
 run;
 
 
